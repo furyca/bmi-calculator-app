@@ -1,24 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import { Box, CssBaseline, ThemeProvider, createTheme } from "@mui/material";
+import Header from "./components/Header";
+import Menu from "./components/Menu";
+import { Route, Routes } from "react-router-dom";
+import Calculator from "./components/Calculator";
+import About from "./components/About";
+import History from "./components/History";
+
+const theme = createTheme({
+  palette: {
+    mode: "dark",
+  },
+});
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <Box sx={{maxWidth: '100%'}}>
+        <Header />
+        <Box sx={{ width: {xs: "95%"}, mx: "auto", mt: {xs: 1, md: 3}, display: "flex", justifyContent: 'center', gap: 2 }}>
+          <Menu />
+          <Routes>
+            <Route path="/" element={<Calculator />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/history" element={<History />} />
+          </Routes>
+        </Box>
+      </Box>
+    </ThemeProvider>
   );
 }
 
